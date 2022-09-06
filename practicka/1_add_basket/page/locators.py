@@ -10,3 +10,6 @@ class MainPageLocators():
 class MsgPageLocators():
     MSG_NAME_ITEM=(By.CSS_SELECTOR,".alertinner>strong")
     MSG_PRICE_ITEM = (By.CSS_SELECTOR, ".alertinner > p > strong")
+    SUCCESS_MESSAGE =(By.CSS_SELECTOR, ".alert")
+
+
