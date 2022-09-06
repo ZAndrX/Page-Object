@@ -8,3 +8,4 @@ def test_guest_should_see_login_link(browser):
     page = MainPage(browser, link)
     page.open()
     page.add_in_basket()
+    page.solve_quiz_and_get_code()
