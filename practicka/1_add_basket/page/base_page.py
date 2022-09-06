@@ -1,4 +1,6 @@
 import math
+import time
+
 from selenium.common.exceptions import NoAlertPresentException # в начале файла
 from selenium.common.exceptions import NoSuchElementException
 from .locators import MainPageLocators
@@ -19,6 +21,13 @@ class BasePage():
         except (NoSuchElementException):
             return False
         return True
+
+    def return_atribbute_el(self, how, what):
+        try:
+            el=self.browser.find_element(how, what)
+        except (NoSuchElementException):
+            return False
+        return el.text
 
     def solve_quiz_and_get_code(self):
         alert = self.browser.switch_to.alert
