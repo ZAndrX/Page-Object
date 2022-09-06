@@ -1,6 +1,7 @@
 from .base_page import BasePage
 from .locators import MainPageLocators
 from .locators import MsgPageLocators
+from .locators import BasketPageLocators
 from selenium.webdriver.common.by import By
 
 class MainPage(BasePage):
@@ -23,5 +24,23 @@ class MainPage(BasePage):
             "Success message is presented, but should not be"
 
     def should_is_disappeared_msg(self):
-        assert self.is_disappeared(*MsgPageLocators.SUCCESS_MESSAGE,timeout=4), \
+        assert self.is_disappeared(*MsgPageLocators.SUCCESS_MESSAGE), \
             "Success message is not disappeared, but should not be"
+
+    def open_basket(self):
+        btn_basket=self.browser.find_element(*MainPageLocators.BASKET_BTN)
+        btn_basket.click()
+
+class BasketPage(BasePage):
+    def open_basket(self):
+        btn_basket=self.browser.find_element(*MainPageLocators.BASKET_BTN)
+        btn_basket.click()
+    def should_basket_is_empty(self):
+        self.check_msg_empty()
+        self.items_not_in_basket()
+
+    def check_msg_empty(self):
+        assert self.return_atribbute_el(*BasketPageLocators.MSG_STATUS)=="Your basket is empty. Continue shopping", "Msg empty is missing on the page"
+
+    def items_not_in_basket(self):
+        assert self.is_not_element_present(*BasketPageLocators.ITEM_IN_BASKET), "Basket isn't empty"
