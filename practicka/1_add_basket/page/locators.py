@@ -16,3 +16,10 @@ class MsgPageLocators:
 class BasketPageLocators:
     MSG_STATUS=(By.CSS_SELECTOR, "#content_inner>p")
     ITEM_IN_BASKET=(By.CSS_SELECTOR, ".basket-items")
+
+class BasePageLocators:
+    LOGIN_LINK=(By.CSS_SELECTOR, "#login_link")
+
+class LoginPageLocators():
+    LOGIN_FORM = (By.CSS_SELECTOR, "#login_form")
+    REGISTER_FORM = (By.CSS_SELECTOR, "#register_form")

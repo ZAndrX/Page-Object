@@ -2,6 +2,7 @@ from .base_page import BasePage
 from .locators import MainPageLocators
 from .locators import MsgPageLocators
 from .locators import BasketPageLocators
+from .locators import LoginPageLocators
 from selenium.webdriver.common.by import By
 
 class MainPage(BasePage):
@@ -44,3 +45,26 @@ class BasketPage(BasePage):
 
     def items_not_in_basket(self):
         assert self.is_not_element_present(*BasketPageLocators.ITEM_IN_BASKET), "Basket isn't empty"
+
+class LoginPage(BasePage):
+    def should_be_login_page(self):
+        self.should_be_login_url()
+        self.should_be_login_form()
+        self.should_be_register_form()
+
+    def should_be_login_url(self):
+        assert self.url == "http://selenium1py.pythonanywhere.com/en-gb/accounts/login/", "url isn't right"
+
+    def should_be_login_form(self):
+        assert self.is_element_present(*LoginPageLocators.LOGIN_FORM), "Login form is missing on the page"
+
+    def should_be_register_form(self):
+        assert self.is_element_present(*LoginPageLocators.REGISTER_FORM), "Register form is missing on the page"
+
+    def go_to_login_page(self):
+        link = self.browser.find_element(*MainPageLocators.LOGIN_LINK)
+        link.click()
+        return LoginPage(browser=self.browser, url=self.browser.current_url)
+
+    def should_be_login_link(self):
+        assert self.is_element_present(*MainPageLocators.LOGIN_LINK)
